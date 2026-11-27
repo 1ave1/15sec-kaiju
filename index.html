@@ -599,7 +599,7 @@ const SK={
  missile:{n:'导弹齐射',d:'从背上一口气射出小型导弹。',mult:.55,hits:5,fx:'missile',sc:f=>(f.back>=4&&f.sym>.5)?.6+.4*f.sym:0},
  mist:{n:'溶解迷雾',d:'中等伤害＋降低敌人防御。',mult:1.1,defd:.75,fx:'mist',sc:f=>(f.curvy>.7&&f.jag<.25)?.5+.2*(1-f.jag):0},
  vine:{n:'藤蔓束缚',d:'用藤蔓捆住。中等伤害＋让敌人休息1回合。',mult:1,skipN:1,fx:'vine',sc:f=>f.tend>=3?.6+.05*f.tend:0},
- napalm:{n:'napalm弹',d:'环状火焰弹。1.7倍。',mult:1.7,fx:'napalm',sc:f=>(f.horn===2&&f.mouth)?.75:0},
+  napalm:{n:'燃烧弹',d:'环状火焰弹。1.7倍。',mult:1.7,fx:'napalm',sc:f=>(f.horn===2&&f.mouth)?.75:0},
  ice:{n:'冻结吐息',d:'1.7倍＋降低敌人速度。',mult:1.7,spdd:.75,fx:'breath',col:ICE,shard:true,sc:f=>(f.mouth&&f.sym>.6)?.55+.4*f.sym:0},
  sonic:{n:'超音波',d:'小伤害＋造成混乱。',mult:.6,conf:2,fx:'sonic',sc:f=>f.mouthWide?.7:0},
  tailblade:{n:'尾刃',d:'用锋利的尾巴一闪。1.9倍。',mult:1.9,fx:'slash',ground:true,sc:f=>(f.tail&&f.tailSharp&&f.tailLen>.4)?.75:0},
@@ -673,25 +673,25 @@ const ORIGIN_BASE=[
   ['缠成一团的耳机',f=>f.strokes>=12?.9+f.overdraw*.3:f.overdraw*.6],['炒面',f=>f.waves*.3+f.curvy*.3],['毛线团',f=>f.overdraw*1.1],
   ['芝麻',f=>f.size<.2?1.2:0],['米粒',f=>f.size<.28?.95:0],['衣柜里的被子',f=>f.size>.85?1:0],['阴天',f=>f.curvy*.6+f.size*.2],
   ['土豆',f=>f.eyes>=3?1:f.eyes*.15],['乌鸦',f=>f.wing],['飞走的购物袋',f=>f.wing*.8+f.tremor*.4],
-  ['小乌龟',f=>f.tail*.85+(f.legs<2?.15:0)],['延长线',f=>f.tail*f.tailLen*1.2],['被炉',f=>f.legs>=2?.65+f.legs*.08:0],['折叠桌',f=>f.legs>=3?.8:0],
+  ['小乌龟',f=>f.tail*.85+(f.legs<2?.15:0)],['延长线',f=>f.tail*f.tailLen*1.2],['暖桌台',f=>f.legs>=2?.65+f.legs*.08:0],['折叠桌',f=>f.legs>=3?.8:0],
   ['颤抖的布丁',f=>f.tremor*1.2],['邮筒',f=>f.mouth*.8],['翻盖钱包',f=>f.mouthWide*.9+f.mouth*.2],['地藏像',f=>f.sym>.85?.85:0],
   ['西兰花',f=>f.curvy*.45+f.spikes*.04],['睡毛',f=>f.jag*.8],['信号不佳的Wi-Fi',f=>f.jag*.4+f.tremor*.5],
   ['咖喱乌冬',()=>.55],['老家的大狗',()=>.5],['隔壁大叔',()=>.45],['冰箱深处的某物',()=>.4],['周一早上',()=>.35]
 ];
 /* 变异的原因：由线条特征决定（尖刺・锯齿＝落雷、肉厚＝深海高压、有翼＝宇宙射线…） */
 const ORIGIN_CAUSE=[
-  ['核实验辐射','被核实验的辐射照射',f=>.45+f.size*.35],
+  ['核实验辐射','受到核实验辐射的照射',f=>.45+f.size*.35],
   ['雷击','被雷电直接劈中',f=>f.jag*.8+f.spikes*.03],
   ['深海高压','扛住了深海的压强',f=>f.dens*.75+f.encl*.2],
-  ['宇宙射线','持续遭受宇宙射线',f=>f.wing*.9],
+  ['宇宙射线','持续遭受宇宙射线照射',f=>f.wing*.9],
   ['大地震','被大地震的地裂吞没',f=>f.tremor*1.0+f.legs*.08],
   ['工业废料','泡在工业废料里',f=>f.strokes>=12?.8:f.overdraw*.7],
-  ['微波','用微波炉加热过度',f=>f.size<.3?.9:0],
+  ['微波','被微波炉加热过度',f=>f.size<.3?.9:0],
   ['古代遗迹的封印','解开了古代遗迹的封印',f=>f.sym*.75],
   ['陨石撞击','被陨石直接砸中',f=>f.circ*.5+(f.eyes>=2?.25:0)],
   ['火山熔岩','被火山的熔岩浇到',f=>f.spikes*.05+f.dens*.3+f.mouth*.15],
   ['神秘培养液','掉进了神秘的培养液',f=>f.curvy*.6+f.waves*.1],
-  ['通宵后的亢奋','被通宵后的亢奋冲昏头',f=>f.early?.8:0],
+  ['通宵后的亢奋','被通宵后的亢奋冲昏了头',f=>f.early?.8:0],
   ['过强的Wi-Fi电波','被过强的Wi-Fi电波照射',f=>.3+f.jag*.25]
 ];
 const ORIGIN_PLACE=['东京湾','富士树海','南极冰盖','大阪地下街','北海道牧场','深夜的便利店','老家的冰箱','公司的茶水间','涩谷十字路口','濑户内海','火星探测器内部','学校泳池','筑地市场旧址','名古屋地下车库','屋久岛森林'];
@@ -700,7 +700,7 @@ function originOf(f,vec){
   const base=ORIGIN_BASE.map(([l,fn])=>({l,s:Math.max(0,fn(f)||0)+R()*.6})).sort((a,b)=>b.s-a.s)[0].l;
   const c=ORIGIN_CAUSE.map(([n,ph,fn])=>({n,ph,s:Math.max(0,fn(f)||0)+R()*.35})).sort((a,b)=>b.s-a.s)[0];
   const year=1954+Math.floor(R()*72),place=ORIGIN_PLACE[Math.floor(R()*ORIGIN_PLACE.length)];
-  return{base,cause:c.n,phrase:c.ph,year,place,text:`${year}年，${place}的${c.ph}让『${base}』突然变异，这只怪兽就此诞生。`};
+  return{base,cause:c.n,phrase:c.ph,year,place,text:`${year}年，在${place}${c.ph}，『${base}』突然变异，这只怪兽就此诞生。`};
 }
 const VERDICT={
   E:'还只是涂鸦阶段。这世界甚至还没注意到它。',
@@ -1152,7 +1152,7 @@ function showAppraisal(animate){
   $('#apVerdict').innerHTML=`<b>世界的反应</b>　${VERDICT[m.threat]}`+(m.mock?`<span class="mock">威胁度的依据｜与常见的涂鸦怪兽${m.mock.n}只的模拟战 <b>${m.mock.w}胜${m.mock.n-m.mock.w}负</b></span>`:'');
   const o=m.origin;
   const aiHTML=`<span class="eyebrow">诞生的由来｜这只怪兽的根源</span><div class="ai-guess">这只怪兽原本是…<b>『${esc(o.base)}』</b></div>`+
-    `<div class="ai-note">${o.year}年，${esc(o.place)}的<em>${esc(o.phrase)}</em>让『${esc(o.base)}』突然变异，这只怪兽就此诞生。</div>`;
+    `<div class="ai-note">${o.year}年，在${esc(o.place)}${esc(o.phrase)}，『${esc(o.base)}』突然变异，这只怪兽就此诞生。</div>`;
   const aiCard=$('#apAI');aiCard.innerHTML=aiHTML;
   const sb=$('#spriteBox').getContext('2d');sb.clearRect(0,0,240,240);fitDraw(sb,m.sprite,240,240,10);
   const len=(4+Math.max(f.bw,f.bh)*96).toFixed(0),wt=Math.round(5+f.size*f.size*(.3+f.dens)*900),kmh=Math.round(30+m.stats.spd*4);
@@ -1584,7 +1584,7 @@ const GAME_URL='https://red-freegames.github.io/15byou-kaiju/';
 function shareText(){
   const m=state.monster,o=m.origin,r=recordText();
   const base=/^https?:/.test(location.protocol)?urlBase():GAME_URL;
-  return `15秒画出了最强怪兽🦖\n「${m.epi}${m.name}」威胁度${m.threat}\n由来：${o.year}年，${o.place}的${o.phrase}让『${o.base}』变异诞生\n必杀技：${m.skills.map(i=>SK[i].n).join('／')}${r?'\n战绩：'+r:''}\n你的怪兽能赢吗？\n#15秒怪兽\n${base}`;
+  return `15秒画出了最强怪兽🦖\n「${m.epi}${m.name}」威胁度${m.threat}\n由来：${o.year}年，在${o.place}${o.phrase}，『${o.base}』变异诞生\n必杀技：${m.skills.map(i=>SK[i].n).join('／')}${r?'\n战绩：'+r:''}\n你的怪兽能赢吗？\n#15秒怪兽\n${base}`;
 }
 function rrect(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
 function wrapText(g,text,x,y,maxW,lh){let line='',yy=y;for(const ch of text){if(g.measureText(line+ch).width>maxW&&line){g.fillText(line,x,yy);line=ch;yy+=lh;}else line+=ch;}if(line)g.fillText(line,x,yy);return yy;}
