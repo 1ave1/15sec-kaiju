@@ -55,18 +55,14 @@ body{min-height:100dvh;background-image:radial-gradient(rgba(22,21,26,.07) 1px,t
 .link{background:none;border:0;font:inherit;font-weight:700;font-size:14px;color:var(--sub);cursor:pointer;padding:8px 10px;text-decoration:underline;text-underline-offset:3px}
 .icon-btn{position:fixed;right:12px;top:12px;z-index:50;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);box-shadow:var(--sh);font-size:16px;cursor:pointer}
 .chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;background:var(--soft);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
-.free-tag{align-self:center;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;padding:7px 14px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--ink)}
-.free-tag:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--good)}
-/* RED FREE GAMES 公共部分：HOME・查看其他游戏・意见表单・页脚 */
+/* RED FREE GAMES 公共部分：HOME ・ 本地化署名 */
 .home-btn{position:fixed;left:12px;top:12px;z-index:50;height:40px;padding:0 14px;border-radius:999px;border:0;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);box-shadow:var(--sh);font:inherit;font-size:13px;font-weight:900;letter-spacing:.06em;color:var(--ink);cursor:pointer;display:none}
 body.sub .home-btn{display:inline-flex;align-items:center;gap:6px}
 body.sub .screen{padding-top:64px}
-.more-btn{display:flex;align-items:center;justify-content:center;height:52px;border-radius:999px;background:var(--card);color:var(--ink);font-weight:900;font-size:16px;text-decoration:none;box-shadow:inset 0 0 0 2px var(--ink)}
-.more-btn:active{transform:scale(.97)}
-.fb-link{align-self:center;font-size:12.5px;font-weight:700;color:var(--sub);text-decoration:underline;text-underline-offset:3px}
-.site-foot{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;font-size:11.5px;font-weight:700;color:var(--sub)}
-.site-foot .coffee{background:#ffdd57;color:#2a1a14;border:2px solid #2a1a14;border-radius:99px;padding:6px 12px;text-decoration:none}
-.site-foot .pv{color:var(--sub);text-decoration:underline}
+/* 本地化署名（改编自原作者作品） */
+.credit{font-size:11.5px;color:var(--sub);text-align:center;margin-top:26px;line-height:1.9}
+.credit a{color:var(--ink);text-decoration:none;border-bottom:1px dotted var(--line)}
+.credit a:hover{color:var(--acc)}
 
 /* title */
 .logo{margin:0;font-size:64px;font-weight:900;letter-spacing:-.04em;line-height:1}
@@ -193,12 +189,6 @@ body.sub .screen{padding-top:64px}
 .res-card canvas{flex:none;width:110px;height:110px;border-radius:16px;background:var(--soft)}
 .res-card .nm{font-size:20px;font-weight:900;line-height:1.25}
 .res-card .epi-chip{margin:0 0 6px;display:inline-block}
-.share-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.share-grid .btn{padding:0 8px;font-size:13px}
-/* viral additions */
-.live-badge{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;font-size:12px;font-weight:800;padding:7px 14px;border-radius:999px}
-.live-badge:before{content:"";width:8px;height:8px;border-radius:50%;background:#ff3b3b;box-shadow:0 0 0 3px rgba(255,59,59,.3);animation:blink 1.2s infinite}
-@keyframes blink{50%{opacity:.25}}
 .alert{display:flex;gap:10px;align-items:flex-start;background:#16151a;color:#fff;border-radius:16px;padding:12px 14px;font-size:13px;font-weight:700;line-height:1.55}
 .alert i{flex:none;font-style:normal;font-size:16px;line-height:1.3}
 .alert b{color:#ff9a76}
@@ -218,8 +208,6 @@ body.sub .screen{padding-top:64px}
 .sheet-bg.on{display:flex}
 .sheet{width:100%;max-width:460px;background:var(--bg);border-radius:26px 26px 0 0;padding:16px 16px calc(20px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:12px;max-height:94dvh;overflow:auto;animation:up .3s cubic-bezier(.2,.8,.2,1)}
 @keyframes up{from{transform:translateY(40px);opacity:0}}
-.btn-x{background:#000;color:#fff;font-size:17px}
-.btn-x .x{font-size:20px;margin-right:6px}
 #shNote a{color:var(--ink);font-weight:800}
 .sheet-h{display:flex;justify-content:space-between;align-items:center;font-weight:900;font-size:17px}
 .seg{display:grid;grid-template-columns:1fr 1fr;background:#fff;border-radius:999px;padding:4px;box-shadow:inset 0 0 0 1.5px var(--line)}
@@ -237,7 +225,6 @@ body.sub .screen{padding-top:64px}
 
 <!-- 标题 -->
 <section id="sTitle" class="screen on">
-  <div class="live-badge">实况·直播·视频投稿·商业化OK</div>
   <div class="eyebrow">15秒怪兽对战</div>
   <h1 class="logo"><span>15秒</span>怪兽</h1>
   <p class="lead">画出来的形象，直接上场战斗。</p>
@@ -250,15 +237,8 @@ body.sub .screen{padding-top:64px}
     <li><i>2</i><div>能力与「诞生的由来」就此决定<small>解析尖刺、肉量、对称性、作画速度等20余项要素，还能知道你画的是个什么来头</small></div></li>
     <li><i>3</i><div>与10只对手怪兽自动对战<small>对手从威胁度D起步，关卡越深越强。赢了就用结果图或挑战书链接向朋友下战书</small></div></li>
   </ol>
-  <div class="free-tag">实况·直播·视频投稿·商业化OK</div>
   <p class="fine center">进度会自动保存在此浏览器中</p>
-  <a class="more-btn" href="https://red-freegames.github.io/">🎮 查看其他游戏</a>
-  <a class="fb-link" id="fbTitle" target="_blank" rel="noopener">💬 意见与 Bug 报告</a>
-  <footer class="site-foot">
-    <a class="coffee" href="https://buymeacoffee.com/red_freegames" target="_blank" rel="noopener">请开发者喝杯咖啡☕</a>
-    <span>© RED FREE GAMES</span>
-    <a class="pv" href="https://red-freegames.github.io/privacy.html" target="_blank" rel="noopener">隐私政策</a>
-  </footer>
+  <p class="credit">中文本地化改编自 <a href="https://red-freegames.github.io/15byou-kaiju/" target="_blank" rel="noopener">15秒怪獣</a><br>原作者 red-freegames ・ 本地化 <a href="https://github.com/1ave1/15sec-kaiju" target="_blank" rel="noopener">1ave1/15sec-kaiju</a></p>
 </section>
 
 <!-- 作画 -->
@@ -322,15 +302,11 @@ body.sub .screen{padding-top:64px}
   <div class="row"><button class="btn acc" id="rNext">下一步</button><button class="btn ghost" id="rStages">关卡选择</button></div>
   <button class="btn" id="rShareOpen">📣 分享结果</button>
   <div class="row"><button class="btn ghost sm" id="rRedo">✍ 再画一次</button><button class="btn ghost sm" id="rTitle2">🏠 HOME</button></div>
-  <a class="more-btn" href="https://red-freegames.github.io/">🎮 查看其他游戏</a>
-  <div class="free-tag">实况·直播·视频投稿·商业化OK</div>
-  <a class="fb-link" id="fbResult" target="_blank" rel="noopener">💬 意见与 Bug 报告</a>
-</section>
-</div>
+  <p class="credit">中文本地化改编自 <a href="https://red-freegames.github.io/15byou-kaiju/" target="_blank" rel="noopener">15秒怪獣</a><br>原作者 red-freegames ・ 本地化 <a href="https://github.com/1ave1/15sec-kaiju" target="_blank" rel="noopener">1ave1/15sec-kaiju</a></p>
+</section></div>
 <div class="sheet-bg" id="shareBg"><div class="sheet">
   <div class="sheet-h">分享<button class="link" id="shClose">关闭</button></div>
   <canvas id="shPrev" width="720" height="960"></canvas>
-  <button class="btn btn-x" id="shX"><span class="x">𝕏</span>发帖</button>
   <p class="fine center" id="shNote"></p>
   <div class="row"><button class="btn ghost sm" id="shImg">📷 保存图片</button><button class="btn ghost sm" id="shChal">⚔ 复制挑战书链接</button></div>
 </div></div>
@@ -1616,7 +1592,7 @@ function makeShareImage(){
   g.fillStyle='#16151a';rrect(g,40,782,640,92,28);g.fill();
   g.fillStyle='#fff';g.font=`900 24px ${F}`;g.fillText('必杀技：'+m.skills.map(i=>SK[i].n).join(' / '),360,826);
   const r=recordText();g.fillStyle='rgba(255,255,255,.6)';g.font=`700 17px ${F}`;g.fillText((r?r+'　':'')+'#15秒怪兽',360,856);
-  g.fillStyle='#16151a';g.font=`800 18px ${F}`;g.fillText('● 实况·直播·视频投稿·商业化OK',360,920);
+  g.fillStyle='#6e6a74';g.font=`700 15px ${F}`;g.fillText('中文本地化改编自 15秒怪獣 ・ red-freegames',360,920);
   return c;
 }
 /* 打开面板时就准备好图片（blob）与简介。
@@ -1629,9 +1605,9 @@ function openShare(){
   const src=makeShareImage(),g=$('#shPrev').getContext('2d');g.clearRect(0,0,720,960);g.drawImage(src,0,0);
   const ctx={canvas:src,blob:null,text:shareText(),name:'kaiju15_'+Date.now().toString(36)+'.png'};
   // 图片导出（约1秒）完成前按钮不可点＝确保分享时必定带图
-  const bx=$('#shX'),bi=$('#shImg');bx.disabled=bi.disabled=true;bx.lastChild.textContent='正在准备图片…';
-  src.toBlob(b=>{ctx.blob=b;if(shareCtx===ctx){bx.disabled=bi.disabled=false;bx.lastChild.textContent='发帖';}},'image/png');shareCtx=ctx;
-  $('#shNote').textContent=isTouch()?'将带着图片和简介打开分享菜单。选择X即可发帖':'保存图片并打开带简介的X发帖页。附上图片后即可发帖';
+  const bi=$('#shImg');bi.disabled=true;
+  src.toBlob(b=>{ctx.blob=b;if(shareCtx===ctx){bi.disabled=false;}},'image/png');shareCtx=ctx;
+  $('#shNote').textContent='保存图片，或复制挑战书链接发给朋友。';
 }
 function closeShare(){$('#shareBg').classList.remove('on');}
 $('#shClose').onclick=closeShare;
@@ -1643,35 +1619,14 @@ function downloadCard(){
   document.body.appendChild(a);a.click();a.remove();
   if(s.blob)setTimeout(()=>URL.revokeObjectURL(a.href),4000);
 }
-// 在新标签页打开（若带 noopener 则返回值恒为 null，会误判为被拦截，故事后关闭 opener）
-function openInNewTab(url){let w=null;try{w=window.open(url,'_blank');}catch(e){}if(!w)return false;try{w.opener=null;}catch(e){}return true;}
-// PC：保存图片（＋复制到剪贴板）并打开带简介的发帖页
-function openIntent(s){
-  const url='https://x.com/intent/post?text='+encodeURIComponent(s.text);
-  const opened=openInNewTab(url);
-  let copied=false;
-  try{if(s.blob&&navigator.clipboard&&window.ClipboardItem){navigator.clipboard.write([new ClipboardItem({'image/png':s.blob})]).then(()=>{copied=true;toast('图片已保存并复制。在发帖页粘贴（Ctrl/⌘+V）或附上图片吧',4200);}).catch(()=>{});}}catch(e){}
-  downloadCard();
-  setTimeout(()=>{if(!copied)toast('图片已保存。在发帖页附上图片吧',4200);},400);
-  const note=$('#shNote');
-  if(opened)note.textContent='图片已自动保存。附到另开标签页的X发帖页上即可发帖';
-  else{note.textContent='未能自动打开发帖页。可以点这里打开 → ';const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener';a.textContent='打开X发帖页';note.append(a);}
-}
-// 手机：带图片＋简介打开分享面板（选X）。不支持的环境走PC同样流程
-function shareX(){
+// 保存图片（PC 顺带复制到剪贴板，方便直接粘贴）
+function saveShareImage(){
   const s=shareCtx;if(!s)return;
-  track('share_x',{touch:isTouch()});
-  if(isTouch()&&s.blob&&navigator.canShare){
-    const file=new File([s.blob],s.name,{type:'image/png'});
-    if(navigator.canShare({files:[file]})){
-      navigator.share({files:[file],text:s.text}).catch(err=>{if(err&&err.name!=='AbortError')openIntent(s);});
-      return;
-    }
-  }
-  openIntent(s);
+  downloadCard();
+  try{if(s.blob&&navigator.clipboard&&window.ClipboardItem){navigator.clipboard.write([new ClipboardItem({'image/png':s.blob})]).then(()=>{toast('图片已保存并复制',3000);}).catch(()=>{});}}catch(e){}
+  toast('图片已保存',2600);
 }
-$('#shX').onclick=shareX;
-$('#shImg').onclick=()=>{if(!shareCtx)return;downloadCard();toast('图片已保存');};
+$('#shImg').onclick=saveShareImage;
 $('#shChal').onclick=async()=>{
   const u=challengeUrl();
   try{await navigator.clipboard.writeText(u);toast('挑战书链接已复制！');}
@@ -1682,11 +1637,9 @@ $('#shChal').onclick=async()=>{
 $('#bStart').onclick=()=>{ac();sfx('click');toDraw();};
 
 /* =====================================================
-   RED FREE GAMES 公共部分（意见表单・访问分析）
+   RED FREE GAMES 公共部分（访问分析）
 ===================================================== */
 const GAME_NAME='15秒怪兽';
-const FEEDBACK_VIEW='https://docs.google.com/forms/d/e/1FAIpQLSfJ2DevI46AJiB_kUAmPGOvckFRqzzSP_iCVd5qiikxr9SIOg/viewform';
-['fbTitle','fbResult'].forEach(id=>{$('#'+id).href=`${FEEDBACK_VIEW}?usp=pp_url&entry.2056875219=${encodeURIComponent(GAME_NAME)}`;});
 // 访问分析（Google Analytics 4）。仅在正式版（github.io）上统计，画面不显示任何东西
 const GA_ID='G-FC7LD0DJTQ';
 (function initAnalytics(){
