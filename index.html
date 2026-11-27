@@ -261,7 +261,7 @@ body.sub .screen{padding-top:64px}
   </footer>
 </section>
 
-<!-- 描画 -->
+<!-- 作画 -->
 <section id="sDraw" class="screen">
   <header class="draw-head">
     <div><div class="eyebrow">15秒挑战</div><div class="h2">画出最强怪兽</div><div class="fine">向右画。画得越满越强</div></div>
@@ -271,7 +271,7 @@ body.sub .screen{padding-top:64px}
   <div class="row"><button class="btn ghost" id="dClear">清除</button><button class="btn acc" id="dDone" disabled>完成！</button></div>
 </section>
 
-<!-- 鑑定 -->
+<!-- 鉴定 -->
 <section id="sAppraise" class="screen">
   <div id="apWait" class="ap-wait"><div class="scan"></div><div>鉴定中…</div><small>正在分析线条特征</small></div>
   <div id="apBody" class="ap-body">
@@ -315,7 +315,7 @@ body.sub .screen{padding-top:64px}
   <button class="btn ghost sm" id="bSkip">跳过 ⏭</button>
 </section>
 
-<!-- 結果 -->
+<!-- 结果 -->
 <section id="sResult" class="screen">
   <div class="res-head"><div class="res-en" id="rEn"></div><div class="res" id="rTitle"></div><div class="fine" id="rSub"></div></div>
   <div class="card res-card"><canvas id="rSprite" width="220" height="220"></canvas><div><div class="epi-chip" id="rEpi"></div><div class="nm" id="rName"></div><div class="fine" id="rMeta"></div></div></div>
@@ -461,8 +461,8 @@ function analyze(strokes,elapsed,early){
   f.thin=Math.max((bw+B)/(bh+B),(bh+B)/(bw+B));
   f.cyN=clamp((cy-gy0)/Math.max(1,GH));
 
-  // 対称性
-  let match=0;for(let i=0;i<cells.length;i+=2){const mx=Math.round(2*cx-cells[i]);if(mx>=0&&mx<gw&&dil[cells[i+1]*gw+mx])match++;}
+    // 对称性
+    let match=0;for(let i=0;i<cells.length;i+=2){const mx=Math.round(2*cx-cells[i]);if(mx>=0&&mx<gw&&dil[cells[i+1]*gw+mx])match++;}
   f.sym=clamp((match/Math.max(1,cells.length/2)-N.symBase)/N.symRange);
 
   // 剪影（填充外侧 → 剩下的就是身体）
@@ -723,7 +723,7 @@ function derive(f){
    全都体现在实战结果上，所以威胁度高一档能赢8〜9成，高两档基本必胜。 */
 const REFS=CONFIG.ref.list.split(' ').map((s,i)=>{
   const a=s.split(','),stats={hp:+a[0],atk:+a[1],def:+a[2],spd:+a[3],ctl:+a[4]};
-  return{name:'基準怪獣',stats,skills:a[5].split('+'),flying:a[6]==='1',vec:'R'+i};
+  return{name:'基准怪兽',stats,skills:a[5].split('+'),flying:a[6]==='1',vec:'R'+i};
 });
 function powerOf(m){
   const hpM=mkF(m).hpMax,id=m.vec||m.name;let s=0,n=0,wins=0;
