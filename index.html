@@ -54,6 +54,85 @@ body{min-height:100dvh;background-image:radial-gradient(rgba(22,21,26,.07) 1px,t
 .btn:disabled{opacity:.35;pointer-events:none}
 .link{background:none;border:0;font:inherit;font-weight:700;font-size:14px;color:var(--sub);cursor:pointer;padding:8px 10px;text-decoration:underline;text-underline-offset:3px}
 .icon-btn{position:fixed;right:12px;top:12px;z-index:50;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);box-shadow:var(--sh);font-size:16px;cursor:pointer}
+.icon-btn.guide{right:60px;font-size:17px}
+/* 指南按钮上的 NEW 徽标（只有通过画画新解锁的技能才会亮）
+   放在按钮内部，跟按钮同为 fixed 层级，滚动页面不会跑位 */
+.guide-new{display:none;position:absolute;left:50%;top:calc(100% + 8px);transform:translateX(-50%) scale(1);transform-origin:top center;background:var(--acc);color:#fff;font-size:9px;font-weight:900;letter-spacing:.04em;line-height:1;padding:3px 6px;border-radius:99px;box-shadow:0 2px 6px rgba(255,74,28,.6);pointer-events:none;white-space:nowrap;z-index:51}
+.guide-new.on{display:block;animation:newpulse 1.6s ease-in-out infinite}
+@keyframes newpulse{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.12)}}
+/* 技能指南：全屏弹层 */
+.gdlg-bg{position:fixed;inset:0;z-index:90;background:rgba(22,21,26,.55);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:14px}
+.gdlg-bg.on{display:flex}
+.gdlg{width:100%;max-width:460px;max-height:92dvh;background:var(--bg);border-radius:24px;box-shadow:var(--sh);display:flex;flex-direction:column;overflow:hidden;animation:gdpop .22s cubic-bezier(.2,.8,.2,1)}
+@keyframes gdpop{from{transform:scale(.96);opacity:0}}
+.gdlg-h{flex:none;display:flex;justify-content:space-between;align-items:center;font-weight:900;font-size:17px;padding:16px 16px 8px}
+.gdlg-pts{flex:none;margin:0 16px 12px;background:#fff;border-radius:16px;padding:12px 13px;box-shadow:var(--sh);display:flex;gap:12px;align-items:center}
+.gdlg-pts .pts-n{flex:none;text-align:center;background:var(--acc);color:#fff;border-radius:12px;padding:7px 12px;min-width:64px}
+.gdlg-pts .pts-n b{display:block;font-size:22px;font-weight:900;line-height:1}
+.gdlg-pts .pts-n small{display:block;font-size:10px;font-weight:800;opacity:.85;margin-top:3px;letter-spacing:.04em}
+.gdlg-pts p{margin:0;font-size:12.5px;font-weight:600;line-height:1.65;color:var(--sub)}
+.gdlg-body{flex:1;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:0 16px 20px}
+.gdlg-empty{background:#fff;border-radius:16px;padding:20px 16px;text-align:center;font-size:13px;font-weight:700;color:var(--sub);line-height:1.7;box-shadow:var(--sh)}
+.gsec{margin:0 0 14px}
+.gsec-h{display:flex;justify-content:space-between;align-items:baseline;font-weight:900;font-size:15px;margin:0 2px 8px}
+.gsec-h small{font-size:11px;font-weight:700;color:var(--sub)}
+.gcard{background:#fff;border-radius:16px;padding:12px 13px;box-shadow:var(--sh);margin-bottom:8px}
+.gcard-h{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.gcard-h b{font-size:15px;font-weight:900}
+/* 技能名后的 NEW 小标签：与右上角按钮徽标同色同风格 */
+.gnew{display:inline-block;vertical-align:2px;margin-left:6px;background:var(--acc);color:#fff;font-size:9px;font-weight:900;letter-spacing:.04em;line-height:1;padding:3px 6px;border-radius:99px;box-shadow:0 2px 6px rgba(255,74,28,.6)}
+/* 「新增」置顶区 */
+.gnew-sec{margin:0 0 12px;padding-bottom:10px;border-bottom:2px solid var(--acc);border-radius:2px}
+.gnew-h{font-weight:900;font-size:12px;color:var(--acc);letter-spacing:.08em;margin:0 2px 8px;display:flex;align-items:center;gap:6px}
+.gnew-h::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--acc);flex:none}
+.gcat{flex:none;font-size:10px;font-weight:800;color:var(--sub);background:var(--soft);border-radius:99px;padding:2px 8px}
+.gdesc{font-size:12.5px;font-weight:600;color:var(--sub);margin-top:5px;line-height:1.6}
+.gcond{margin-top:9px;font-size:13px;font-weight:700;line-height:1.7;background:var(--soft);border-radius:11px;padding:9px 11px}
+.gcond .glabel{display:block;font-size:10px;font-weight:800;color:var(--acc);letter-spacing:.08em;margin-bottom:3px}
+.gcard.locked{background:#fbfaf8;border:1px dashed var(--line);box-shadow:none;text-align:center}
+.gcard.locked .gcard-h{justify-content:center}
+.gcard.locked .gdesc{margin-top:8px}
+.gbtn{margin-top:10px}
+.gorgans{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.gorgan{background:#fff;border-radius:14px;padding:9px;box-shadow:var(--sh);text-align:center}
+.gorgan svg{width:100%;max-width:78px;height:auto;display:block;margin:0 auto 5px}
+.gorgan b{display:block;font-size:12.5px;font-weight:900}
+.gorgan small{display:block;font-size:10.5px;font-weight:600;color:var(--sub);margin-top:3px;line-height:1.5}
+/* 器官名高亮 + tooltip */
+.org{color:var(--acc);font-weight:900;cursor:help;border-bottom:2px solid rgba(255,74,28,.35);white-space:nowrap}
+.org:hover,.org.act{background:rgba(255,74,28,.12);border-radius:4px}
+#organTip{position:fixed;z-index:95;max-width:280px;background:var(--ink);color:#fff;border-radius:13px;padding:10px 12px;font-size:12.5px;font-weight:700;line-height:1.65;box-shadow:0 10px 30px -8px rgba(0,0,0,.5);display:none;pointer-events:none}
+#organTip.on{display:block}
+#organTip b{color:#ff9a76}
+#organTip .tip-h{display:block;font-size:13px;font-weight:900;margin-bottom:4px;color:#fff}
+/* 鉴定页的指南反馈 */
+.gnote{background:rgba(255,74,28,.09);border-radius:12px;padding:9px 12px;font-size:12.5px;font-weight:700;color:var(--acc);text-align:center}
+.gnote b{font-weight:900}
+/* 结果页：战斗数据 + 复盘 */
+.rstats{background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:13px 14px;margin-top:4px}
+.rstats-h{display:flex;justify-content:space-between;align-items:baseline;font-weight:900;font-size:14px;margin-bottom:9px}
+.rstats-h small{font-size:11px;font-weight:700;color:var(--sub)}
+.rrow{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12.5px;font-weight:700;padding:5px 0;border-top:1px solid var(--soft)}
+.rrow:first-of-type{border-top:none}
+.rrow .rk{color:var(--sub);font-weight:800}
+.rrow .rv2{font-variant-numeric:tabular-nums;font-weight:900}
+.rrow .rv2 i{font-style:normal;color:var(--sub);font-weight:700;margin:0 4px}
+.rrow.gap{background:rgba(255,74,28,.07);border-radius:8px;padding:5px 8px;margin:0 -8px}
+.rrow.gap .rk{color:var(--acc)}
+.rrow.gap .rv2 em{font-style:normal;color:var(--acc);font-size:10px;font-weight:900;margin-left:5px}
+.rrow.win{background:rgba(19,178,107,.09);border-radius:8px;padding:5px 8px;margin:0 -8px}
+.rrow.win .rk{color:var(--good)}
+.rrow.win .rv2 em{font-style:normal;color:var(--good);font-size:10px;font-weight:900;margin-left:5px}
+.rtips{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+.rtip{background:#16151a;color:#fff;border-radius:var(--r);padding:13px 15px;font-size:14px;font-weight:800;line-height:1.72;box-shadow:var(--sh)}
+.rtip i{font-style:normal;display:block;font-size:10px;font-weight:900;letter-spacing:.12em;color:#ff9a76;margin-bottom:5px}
+.rtip b{color:#ff9a76;font-weight:900}
+.rtip.sec{background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:var(--sh);font-size:13px;font-weight:700}
+.rtip.sec i{color:var(--acc)}
+.rtip.sec b{color:var(--acc)}
+.rtip.fb{background:linear-gradient(135deg,#1f1c2b,#3b2347)}
+.rhi{background:#fff;border-radius:14px;padding:10px 12px;font-size:12.5px;font-weight:700;line-height:1.7;box-shadow:var(--sh);margin-top:4px}
+.rhi b{color:var(--acc);font-weight:900}
 .chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;background:var(--soft);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
 /* RED FREE GAMES 公共部分：HOME ・ 本地化署名 */
 .home-btn{position:fixed;left:12px;top:12px;z-index:50;height:40px;padding:0 14px;border-radius:999px;border:0;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);box-shadow:var(--sh);font:inherit;font-size:13px;font-weight:900;letter-spacing:.06em;color:var(--ink);cursor:pointer;display:none}
@@ -220,6 +299,7 @@ body.sub .screen{padding-top:64px}
 </head>
 <body>
 <button class="home-btn" id="home" aria-label="返回标题画面">🏠 HOME</button>
+<button class="icon-btn guide" id="guideBtn" aria-label="技能指南">📖<span class="guide-new" id="guideNew">NEW</span></button>
 <button class="icon-btn" id="mute" aria-label="切换音效">🔊</button>
 <div id="app">
 
@@ -236,6 +316,7 @@ body.sub .screen{padding-top:64px}
     <li><i>1</i><div><b>15秒</b>画出最强怪兽<small>落笔第一画即开始计时。尖刺、大小、笔触都影响强度。向右画更容易被识别出嘴和尾巴</small></div></li>
     <li><i>2</i><div>能力与「诞生的由来」就此决定<small>解析尖刺、肉量、对称性、作画速度等20余项要素，还能知道你画的是个什么来头</small></div></li>
     <li><i>3</i><div>与10只对手怪兽自动对战<small>对手从威胁度D起步，关卡越深越强。赢了就用结果图或挑战书链接向朋友下战书</small></div></li>
+    <li><i>4</i><div>解锁技能指南<small>右上角的📖按钮记录收集到的所有技能。拿到一个必杀技就解锁它的获得条件，还能探索其他的未知技能和搭配</small></div></li>
   </ol>
   <p class="fine center">进度会自动保存在此浏览器中</p>
   <p class="credit">中文本地化改编自 <a href="https://red-freegames.github.io/15byou-kaiju/" target="_blank" rel="noopener">15秒怪獣</a><br>原作者 red-freegames ・ 本地化 <a href="https://github.com/1ave1/15sec-kaiju" target="_blank" rel="noopener">1ave1/15sec-kaiju</a></p>
@@ -302,7 +383,8 @@ body.sub .screen{padding-top:64px}
   <div class="row"><button class="btn acc" id="rNext">下一步</button><button class="btn ghost" id="rStages">关卡选择</button></div>
   <button class="btn" id="rShareOpen">📣 分享结果</button>
   <div class="row"><button class="btn ghost sm" id="rRedo">✍ 再画一次</button><button class="btn ghost sm" id="rTitle2">🏠 HOME</button></div>
-  <p class="credit">中文本地化改编自 <a href="https://red-freegames.github.io/15byou-kaiju/" target="_blank" rel="noopener">15秒怪獣</a><br>原作者 red-freegames ・ 本地化 <a href="https://github.com/1ave1/15sec-kaiju" target="_blank" rel="noopener">1ave1/15sec-kaiju</a></p>
+  <div id="rReview"></div>
+  <p class="credit">中文本地化改编自 <a href="https://red-freegames.github.io/15byou-kaiju/" target="_blank" rel="noopener">15秒怪獣</a><br>原作者 red-freegames ・ 本地化 <a href="https://github.com/1ave1/15sec-kaiju" target="_blank" rel="noopener">1ave1/15sec-kaiju</a><br>本地化版本额外包含「技能指南」与「战后复盘」功能</p>
 </section></div>
 <div class="sheet-bg" id="shareBg"><div class="sheet">
   <div class="sheet-h">分享<button class="link" id="shClose">关闭</button></div>
@@ -311,6 +393,17 @@ body.sub .screen{padding-top:64px}
   <div class="row"><button class="btn ghost sm" id="shImg">📷 保存图片</button><button class="btn ghost sm" id="shChal">⚔ 复制挑战书链接</button></div>
 </div></div>
 <div id="toast"></div>
+<div id="organTip"></div>
+
+<!-- 技能指南 -->
+<div class="gdlg-bg" id="guideBg"><div class="gdlg">
+  <div class="gdlg-h"><span>技能指南</span><button class="link" id="guideClose">关闭</button></div>
+  <div class="gdlg-pts">
+    <div class="pts-n"><b id="gdPts">0</b><small>点数</small></div>
+    <p>每获得一个必杀技，就会解锁它的<b>获得条件</b>，同时送你 1 点数。<br>点数可以用来解锁其他必杀技的获得条件 —— 看完条件，去试试怎么画出来。</p>
+  </div>
+  <div class="gdlg-body" id="gdBody"></div>
+</div></div>
 
 <script>
 'use strict';
@@ -822,17 +915,267 @@ function stageEnemy(st,scale){
 /* ===================== save ===================== */
 const SAVE_KEY='kaiju15.save.v1';
 function loadSave(){
-  const d={v:1,cleared:{},wins:0,plays:0};
+  const d={v:1,cleared:{},wins:0,plays:0,guide:{unlocked:[],points:0,pending:false,newSkills:{},seq:0}};
   try{const r=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
     if(r&&typeof r==='object'){
       if(Array.isArray(r.cleared))r.cleared.forEach((v,i)=>{if(v)d.cleared[i+1]=true;});
       else if(r.cleared&&typeof r.cleared==='object')for(const k in r.cleared){const n=+k;if(n>=1&&n<=10&&r.cleared[k])d.cleared[n]=true;}
-      d.wins=+r.wins||0;d.plays=+r.plays||0;}
+      d.wins=+r.wins||0;d.plays=+r.plays||0;
+      // 技能指南进度（旧存档没有这些字段，自动补默认值）
+      const g=r.guide;
+      if(g&&typeof g==='object'){
+        if(Array.isArray(g.unlocked))d.guide.unlocked=g.unlocked.filter(x=>typeof x==='string');
+        d.guide.points=Math.max(0,Math.floor(+g.points||0));
+        d.guide.pending=!!g.pending;
+        // 新技能表：{ id:{t:获得时间戳, s:同批次序号} }。旧存档没有 → 空表 → 一律不标 NEW
+        if(g.newSkills&&typeof g.newSkills==='object'){
+          for(const k in g.newSkills){
+            const v=g.newSkills[k];
+            if(typeof k==='string'&&v&&typeof v==='object'){
+              const t=+v.t||0,s=+v.s||0;
+              if(t>0&&s>0)d.guide.newSkills[k]={t:t,s:s};
+            }
+          }
+        }
+        d.guide.seq=Math.max(0,Math.floor(+g.seq||0));}}
   }catch(e){}
   return d;
 }
 function writeSave(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(save));}catch(e){}}
 let save=loadSave();
+
+/* ===================== 技能指南 ===================== */
+const GUIDE_SKILLS=Object.keys(SK).filter(id=>id!=='tackle');   // 27 个非默认必杀技
+function guideUnlocked(id){return save.guide.unlocked.indexOf(id)>=0;}
+function guideIsNew(id){return !!save.guide.newSkills[id];}      // 是否带 NEW 标记
+/* 记一个新技能：t=获得时间戳，s=同批次序号（同毫秒并列时保证排序稳定）
+   注意：调用方可能已把 id 加入 unlocked，所以这里不能拿 guideUnlocked 当守卫 */
+function markNew(id){
+  if(!id||id==='tackle')return;
+  if(guideIsNew(id))return;
+  save.guide.seq=(save.guide.seq||0)+1;
+  save.guide.newSkills[id]={t:Date.now(),s:save.guide.seq};
+}
+function guideUnlock(id){          // 用 1 点数解锁一个技能的条件说明（图鉴内解锁，也算「新获得」）
+  if(!id||guideUnlocked(id))return false;
+  if(save.guide.points<1)return false;
+  save.guide.points--;save.guide.unlocked.push(id);
+  markNew(id);                    // 图鉴内解锁 → 进 NEW 表，但不点亮按钮徽标
+  writeSave();return true;
+}
+function guideGrant(id){           // 画画获得必杀技时：解锁其条件 + 送 1 点数 + 亮 NEW
+  if(!id||id==='tackle'||guideUnlocked(id))return false;
+  save.guide.unlocked.push(id);save.guide.points++;
+  save.guide.pending=true;        // 有新技能待查看（按钮徽标：只算画画获得）
+  markNew(id);
+  writeSave();updateGuideNew();
+  return true;
+}
+/* NEW 徽标：只有「通过画画新解锁的技能」会亮；点开指南后熄灭 */
+function updateGuideNew(){
+  const el=$('#guideNew');if(!el)return;
+  el.classList.toggle('on',!!save.guide.pending);
+}
+function clearGuideNew(){          // 点开指南后清除按钮徽标
+  if(!save.guide.pending)return;
+  save.guide.pending=false;writeSave();updateGuideNew();
+}
+function clearGuideNewTags(){      // 关闭指南后清除指南内的 NEW 标记（含刚用点数解锁的）
+  const n=Object.keys(save.guide.newSkills).length;
+  if(!n)return;
+  save.guide.newSkills={};writeSave();
+}
+
+/* ---- 器官词条表：画法规范 + 示意图 ---- */
+const S=82;                       // 示意图画布边长
+const SVG=(inner)=>`<svg viewBox="0 0 ${S} ${S}" xmlns="http://www.w3.org/2000/svg">${inner}</svg>`;
+const O_BODY='<ellipse cx="41" cy="46" rx="24" ry="21" fill="#f7f5f1" stroke="#16151a" stroke-width="3"/>';
+const O_BODY_R='<ellipse cx="41" cy="46" rx="24" ry="21" fill="#f7f5f1" stroke="#e6e2da" stroke-width="3" stroke-dasharray="4 4"/>';
+const ORGANS=[
+ {k:'眼睛',d:'画成<b>闭合的圈</b>，不能是点。直径别太大 —— 要小于身体对角线的 45%，画太大反而不算眼睛。',
+  s:()=>SVG(O_BODY+'<circle cx="35" cy="42" r="5" fill="none" stroke="#ff4a1c" stroke-width="3"/>')},
+ {k:'嘴',d:'要画在身体的<b>右半边</b>（怪兽面朝右）。画得扁长就是「宽嘴」。',
+  s:()=>SVG(O_BODY+'<path d="M52 40h12v9H52z" fill="none" stroke="#ff4a1c" stroke-width="3"/>')},
+ {k:'角',d:'身体<b>顶部</b>的尖刺。位置太偏或太偏下就不算数。',
+  s:()=>SVG(O_BODY+'<path d="M32 26l4-12 4 12" fill="none" stroke="#ff4a1c" stroke-width="3" stroke-linejoin="round"/>')},
+ {k:'背鳍',d:'身体<b>上背</b>那一排的突起。数量要够。',
+  s:()=>SVG(O_BODY+'<path d="M30 26l4-9 4 9M40 25l4-8 4 8" fill="none" stroke="#ff4a1c" stroke-width="3" stroke-linejoin="round"/>')},
+ {k:'翅膀',d:'身体<b>左右两侧</b>各一个大而尖的突起。只有一边的话，飞行能力会打折。',
+  s:()=>SVG(O_BODY+'<path d="M18 46L6 30l14 6M64 46l12-16-14 6" fill="none" stroke="#ff4a1c" stroke-width="3" stroke-linejoin="round"/>')},
+ {k:'尾巴',d:'在身体的<b>左侧</b>（怪兽的<b>后</b>方）甩出去的一笔，横向拉长、末端要甩出去。画在右边不算。',
+  s:()=>SVG(O_BODY+'<path d="M18 52L4 46" fill="none" stroke="#ff4a1c" stroke-width="3" stroke-linecap="round"/>')},
+ {k:'腿',d:'身体<b>最底部</b>那一段的竖直笔画。',
+  s:()=>SVG(O_BODY+'<path d="M31 66v11M51 66v11" fill="none" stroke="#ff4a1c" stroke-width="3" stroke-linecap="round"/>')},
+ {k:'锯齿',d:'折角很尖的转折。集中在身体<b>中间</b>才算「腹部链锯」。',
+  s:()=>SVG(O_BODY+'<path d="M22 46l5-6 5 6 5-6 5 6" fill="none" stroke="#ff4a1c" stroke-width="3" stroke-linejoin="round"/>')},
+ {k:'细长突起',d:'比普通尖刺<b>更细更长</b>的突起。',
+  s:()=>SVG(O_BODY+'<path d="M41 25V6" fill="none" stroke="#ff4a1c" stroke-width="2.5" stroke-linecap="round"/>')},
+ {k:'圆形',d:'整体轮廓接近正圆。',
+  s:()=>SVG('<circle cx="41" cy="41" r="26" fill="#f7f5f1" stroke="#ff4a1c" stroke-width="3"/>')},
+ {k:'波浪线',d:'连续起伏的曲线，<b>不能带尖角</b>。',
+  s:()=>SVG('<path d="M8 41q8-12 16 0t16 0 16 0 16 0" fill="none" stroke="#ff4a1c" stroke-width="3" stroke-linecap="round"/>')},
+ {k:'涂画密度',d:'在轮廓<b>内部反复叠涂</b>，让身体显得厚实。',
+  s:()=>SVG(O_BODY+'<circle cx="41" cy="46" r="15" fill="none" stroke="#ff4a1c" stroke-width="2"/><circle cx="41" cy="46" r="8" fill="none" stroke="#ff4a1c" stroke-width="2"/>')},
+ {k:'左右对称',d:'上下左右尽量镜像。<b>一笔画完</b>最容易对称。',
+  s:()=>SVG('<path d="M41 18v48M18 41h46" stroke="#e6e2da" stroke-width="2" stroke-dasharray="3 4"/><ellipse cx="41" cy="41" rx="24" ry="21" fill="none" stroke="#ff4a1c" stroke-width="3"/>')},
+ {k:'作画速度',d:'越快越强 —— 15 秒不要用完。',
+  s:()=>SVG('<circle cx="41" cy="41" r="26" fill="none" stroke="#e6e2da" stroke-width="3"/><path d="M41 41V24" stroke="#ff4a1c" stroke-width="3" stroke-linecap="round"/><path d="M41 41l12 8" stroke="#ff4a1c" stroke-width="3" stroke-linecap="round"/><path d="M28 12l6 5M46 9l-2 6" stroke="#ff4a1c" stroke-width="2.5" stroke-linecap="round"/>')},
+ {k:'手抖',d:'线条故意画得抖一些。',
+  s:()=>SVG('<path d="M10 52l8-12 6 14 8-16 6 16 8-14 6 12 8-10" fill="none" stroke="#ff4a1c" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>')},
+ {k:'体型',d:'画布上占的面积。太大扣速度，太小会触发「过小的一击」。',
+  s:()=>SVG('<circle cx="41" cy="41" r="9" fill="none" stroke="#e6e2da" stroke-width="2" stroke-dasharray="3 3"/><circle cx="41" cy="41" r="26" fill="none" stroke="#ff4a1c" stroke-width="3"/>')},
+ {k:'操控',d:'尽量少笔画、保持对称。操控过低时必杀技会失控。',
+  s:()=>SVG('<path d="M41 14l4 9 10 1-7 7 2 10-9-5-9 5 2-10-7-7 10-1z" fill="none" stroke="#ff4a1c" stroke-width="2.5" stroke-linejoin="round"/>')},
+];
+const ORGAN_MAP={};ORGANS.forEach(o=>ORGAN_MAP[o.k]=o);
+
+/* ---- 技能条件表：类别 + 获得条件（定性描述 + 方位限定） ---- */
+const SKILL_INFO={
+ beam:{c:'喷射系',cond:'画一张{嘴}，并把身体<b>涂得厚实</b>。'},
+ fire:{c:'喷射系',cond:'画一张{嘴}，身上带一些{锯齿}。'},
+ gravity:{c:'雷击系',cond:'在身体<b>顶部</b>画出 3 个以上的{角}。'},
+ scales:{c:'飞行系',cond:'画出{翅膀}，并且<b>体型小巧</b>。'},
+ shock:{c:'飞行系',cond:'画出{翅膀}，并且<b>身躯巨大</b>。'},
+ chainsaw:{c:'变形系',cond:'在身体<b>正中间</b>布满{锯齿}。'},
+ missile:{c:'变形系',cond:'背上长出 4 个以上的{背鳍}，而且<b>左右对称</b>。'},
+ mist:{c:'变形系',cond:'全身画成<b>起伏的曲线</b>，不要有尖角。'},
+ vine:{c:'变形系',cond:'伸出 3 根以上的{细长突起}。'},
+ napalm:{c:'喷射系',cond:'正好 2 个{角}，再加一张{嘴}。'},
+ ice:{c:'喷射系',cond:'画一张{嘴}，并且<b>左右对称</b>。'},
+ sonic:{c:'喷射系',cond:'画一张<b>很宽的嘴</b>。'},
+ tailblade:{c:'变形系',cond:'甩出一条<b>长而锋利的尾巴</b>。'},
+ burrow:{c:'变形系',cond:'<b>几乎没有腿</b>，身材<b>细长</b>。'},
+ tremble:{c:'技巧系',cond:'画得<b>手抖</b>，线条抖得明显。'},
+ gaze:{c:'技巧系',cond:'画出 3 只以上的{眼睛}。'},
+ one:{c:'技巧系',cond:'<b>一笔画完</b>，而且要画得够长。'},
+ scribble:{c:'技巧系',cond:'乱涂 <b>15 笔以上</b>。'},
+ quick:{c:'技巧系',cond:'在 <b>5 秒内</b>画完。'},
+ grand:{c:'技巧系',cond:'慢慢画，<b>用满 14 秒以上</b>。'},
+ roll:{c:'变形系',cond:'整体画成<b>一个圆</b>。'},
+ apology:{c:'技巧系',cond:'把怪兽画在画面<b>下方</b>，并且<b>头朝下</b>。'},
+ dance:{c:'技巧系',cond:'画出 3 道以上的{波浪线}。'},
+ tiny:{c:'技巧系',cond:'画得<b>很小很小</b>。'},
+ huge:{c:'技巧系',cond:'画得<b>很大</b>，而且要<b>稳不住</b>。'},
+ uru:{c:'技巧系',cond:'画 1~2 只{眼睛}，而且眼睛<b>要够大</b>。'},
+ statue:{c:'技巧系',cond:'<b>不超过 3 笔</b>，并且<b>左右对称</b>。'},
+};
+/* 条件文案里的 {器官} 换成高亮 span */
+function condHTML(id){
+  const raw=(SKILL_INFO[id]&&SKILL_INFO[id].cond)||'';
+  return raw.replace(/\{([^}]+)\}/g,(m,k)=>ORGAN_MAP[k]?`<span class="org" data-org="${k}">${k}</span>`:`<b>${k}</b>`);
+}
+
+/* ---- 器官 tooltip ---- */
+let tipOrg=null;
+function showOrgTip(k,anchor){
+  const o=ORGAN_MAP[k];if(!o)return;
+  const t=$('#organTip');
+  t.innerHTML=`<span class="tip-h">${o.k}</span>${o.d}`;
+  t.classList.add('on');
+  tipOrg=k;
+  const r=anchor.getBoundingClientRect(),tr=t.getBoundingClientRect();
+  let x=r.left+r.width/2-tr.width/2,y=r.top-tr.height-9;
+  if(y<8)y=r.bottom+9;
+  x=Math.max(8,Math.min(x,window.innerWidth-tr.width-8));
+  t.style.left=x+'px';t.style.top=y+'px';
+}
+function hideOrgTip(){$('#organTip').classList.remove('on');tipOrg=null;}
+document.addEventListener('mouseover',e=>{
+  const o=e.target.closest&&e.target.closest('.org');
+  if(o&&!o.classList.contains('act')){o.classList.add('act');showOrgTip(o.dataset.org,o);}
+});
+document.addEventListener('mouseout',e=>{
+  const o=e.target.closest&&e.target.closest('.org');
+  if(o){o.classList.remove('act');if(tipOrg===o.dataset.org)hideOrgTip();}
+});
+document.addEventListener('click',e=>{
+  const o=e.target.closest&&e.target.closest('.org');
+  if(o){e.preventDefault();e.stopPropagation();o.classList.add('act');showOrgTip(o.dataset.org,o);
+    setTimeout(()=>{o.classList.remove('act');hideOrgTip();},2600);}
+});
+
+/* ---- 指南正文渲染 ---- */
+/* 本轮（指南开着时）用点数解锁的技能：卡片留在未解锁区原地，不当场跳到置顶区。
+   关闭重开后才归入「已解锁」区的置顶区。 */
+let guideSessionUnlocked={};
+function guideSkillCard(id){
+  const S_=SK[id],info=SKILL_INFO[id]||{c:'其他',cond:''};
+  if(!guideUnlocked(id)){
+    return`<div class="gcard locked"><div class="gcard-h"><b>???</b><span class="gcat">${info.c}</span></div>
+      <p class="gdesc">还没解锁这个必杀技的获得条件</p>
+      <button class="btn ghost sm gbtn" data-unlock="${id}"${save.guide.points<1?' disabled':''}>解锁（1 点）</button></div>`;
+  }
+  const nb=guideIsNew(id)?'<span class="gnew">NEW</span>':'';
+  return`<div class="gcard"><div class="gcard-h"><b>${S_.n}${nb}</b><span class="gcat">${info.c}</span></div>
+    <p class="gdesc">${S_.d}</p>
+    <div class="gcond"><span class="glabel">获得条件</span>${condHTML(id)}</div></div>`;
+}
+/* 新技能排序：跨批次按时间戳降序（最新在上）；同批次按 seq 升序（早拿的在上） */
+function sortNewSkills(ids){
+  return ids.slice().sort((a,b)=>{
+    const A=save.guide.newSkills[a]||{t:0,s:0},B=save.guide.newSkills[b]||{t:0,s:0};
+    if(B.t!==A.t)return B.t-A.t;
+    return A.s-B.s;
+  });
+}
+function guideRender(){
+  const allOwned=GUIDE_SKILLS.filter(id=>guideUnlocked(id));
+  // 本轮刚用点数解锁的，暂留在未解锁区
+  const sessionOwned=allOwned.filter(id=>guideSessionUnlocked[id]);
+  const settledOwned=allOwned.filter(id=>!guideSessionUnlocked[id]);
+  const newOnes=sortNewSkills(settledOwned.filter(id=>guideIsNew(id)));
+  const oldOnes=settledOwned.filter(id=>!guideIsNew(id));
+  // 未解锁区：真正未解锁的 + 本轮刚解锁的（原地显示已解锁样式）
+  const locked=GUIDE_SKILLS.filter(id=>!guideUnlocked(id)||guideSessionUnlocked[id]);
+  const html=[];
+  let body='';
+  if(newOnes.length){
+    body+=`<div class="gnew-sec"><div class="gnew-h">新增</div>${newOnes.map(guideSkillCard).join('')}</div>`;
+  }
+  if(oldOnes.length)body+=oldOnes.map(guideSkillCard).join('');
+  if(!allOwned.length)body='<div class="gdlg-empty">还没有解锁任何必杀技。<br>去画一只怪兽，拿到必杀技就能解锁它的获得条件。</div>';
+  html.push(`<div class="gsec"><div class="gsec-h">必杀技<small>已解锁 ${allOwned.length} / ${GUIDE_SKILLS.length}</small></div>
+    ${body}</div>`);
+  html.push(`<div class="gsec"><div class="gsec-h">未解锁<small>1 点可解锁一个</small></div>${locked.map(guideSkillCard).join('')}</div>`);
+  html.push(`<div class="gsec"><div class="gsec-h">器官图鉴<small>怎么画才算数</small></div>
+    <div class="gorgans">${ORGANS.map(o=>`<div class="gorgan">${o.s()}<b>${o.k}</b><small>${o.d.replace(/<[^>]+>/g,'')}</small></div>`).join('')}</div></div>`);
+  html.push(`<div class="gsec"><div class="gsec-h">变强要点</div>
+    <div class="gcard"><p class="gdesc"><b>加尖刺会提攻击，但会掉操控。</b><br>
+    多笔画分开画（尖刺、獠牙、尾巴各自一笔）会让左右对称暴跌 → 操控从 60 掉到 35 → 必杀技容易失控。<br>
+    <b>一笔画完一个带尖角的大方块</b>：攻击 49 / 操控 60 / 防御 66 / 体力 72，各项都不吃亏。</p></div>
+    <div class="gcard"><p class="gdesc"><b>体力和防御：把身体涂满比把身体画大更有效。</b><br>
+    画大一倍只涨 4 点体力，涂满涨 3~9 点。<br>
+    <b>速度</b>：15 秒内画完（+16），加上翅膀和腿（再 +19）。别把身体画太大（体型扣 16 速度）。</p></div></div>`);
+  $('#gdBody').innerHTML=html.join('');
+  $('#gdBody').querySelectorAll('[data-unlock]').forEach(b=>{
+    b.onclick=()=>{
+      if(guideUnlock(b.dataset.unlock)){
+        $('#gdPts').textContent=save.guide.points;
+        guideSessionUnlocked[b.dataset.unlock]=true;   // 本轮解锁，暂留原地
+        guideRender();
+        toast('已解锁「'+SK[b.dataset.unlock].n+'」的获得条件');
+      }else toast('点数不够了');
+    };
+  });
+}
+function openGuide(){
+  guideSessionUnlocked={};        // 新一轮会话，本轮解锁的技能重新从置顶区算
+  $('#gdPts').textContent=save.guide.points;
+  guideRender();
+  $('#guideBg').classList.add('on');
+  clearGuideNew();          // 按钮徽标熄灭（但指南内的 NEW 保留到关闭）
+  // 有新技能时自动滚到已解锁区顶部，让置顶的新技能立刻入眼
+  if(Object.keys(save.guide.newSkills).length){
+    const b=$('#gdBody');if(b)b.scrollTop=0;
+  }
+}
+function closeGuide(){$('#guideBg').classList.remove('on');hideOrgTip();clearGuideNewTags();}
+$('#guideBtn').onclick=openGuide;
+$('#guideClose').onclick=closeGuide;
+$('#guideBg').addEventListener('click',e=>{if(e.target.id==='guideBg')closeGuide();});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&$('#guideBg').classList.contains('on')){e.preventDefault();closeGuide();}
+});
 
 /* ===================== sprites ===================== */
 function makePlayerSprite(strokes,ink='#16151a'){
@@ -1139,6 +1482,17 @@ function showAppraisal(animate){
     const tags=pos.map(x=>`<span>${x[0]} +${x[1]}</span>`).join('')+neg.map(x=>`<span class="neg">${x[0]} ${x[1]}</span>`).join('');
     return`<div class="stat"><div class="stat-top"><b>${STAT_LABEL[k]}</b><div class="track"><i data-w="${m.stats[k]}"></i></div><span>${m.stats[k]}</span></div><div class="why">${tags}</div></div>`;}).join('');
   $('#apSkills').innerHTML='<div class="eyebrow">必杀技'+(m.skills.length>1?'<span class="rare">RARE 双必杀</span>':'')+'</div>'+m.skills.map(id=>`<div class="sk"><b>${SK[id].n}</b><span>${SK[id].d}</span></div>`).join('');
+  // 获得必杀技 → 解锁其获得条件 + 送 1 点数
+  const earned=m.skills.filter(id=>id!=='tackle'&&!guideUnlocked(id));
+  if(earned.length){
+    earned.forEach(id=>guideGrant(id));
+    const first=SK[earned[0]].n;
+    const note=document.createElement('div');
+    note.className='gnote';
+    note.innerHTML=`🎁 已解锁「<b>${esc(first)}</b>」的获得条件　+<b>${earned.length}</b> 点数　（当前 <b>${save.guide.points}</b> 点）`;
+    $('#apSkills').insertAdjacentElement('afterend',note);
+    setTimeout(()=>{note.remove();},9000);
+  }
   const best=STAT_KEYS.reduce((a,k)=>m.stats[k]>m.stats[a]?k:a,'hp'),worst=STAT_KEYS.reduce((a,k)=>m.stats[k]<m.stats[a]?k:a,'hp');
   const bTop=(m.why[best]||[]).find(x=>x[1]>0),wNeg=(m.why[worst]||[]).find(x=>x[1]<0);
   $('#apCmt').innerHTML=`<div class="cmt"><i>👍</i><div><b>长处：${STAT_LABEL[best]}</b><br>${PRAISE[best]}${bTop?`决定因素是「${bTop[0]}」。`:''}</div></div>`+
@@ -1521,6 +1875,132 @@ async function runBattle(sim){
 $('#bSkip').onclick=()=>{skipFlag=true;$('#bSkip').style.display='none';};
 
 /* ===================== result ===================== */
+/* ---- 战斗统计聚合：从事件流里分出普通攻击/技能的命中与落空 ---- */
+function battleStats(sim){
+  const s={n:{hit:0,miss:0},s:{hit:0,miss:0},e:{hit:0,miss:0},es:{hit:0,miss:0},
+           dmg:[0,0],taken:[0,0],runaway:0,dodge:0};
+  for(const e of sim.events){
+    if(e.t!=='act')continue;
+    const isSkill=(e.fx!=='attack');
+    if(e.fx==='runaway')s.runaway++;
+    for(const h of (e.hits||[])){
+      if(h.self){s.taken[e.who]+=h.dmg||0;continue;}
+      if(h.counter){s.taken[e.who]+=h.rd||0;continue;}
+      if(h.dodge)s.dodge++;
+      const me=(e.who===0);
+      const sk=isSkill;
+      if(h.miss){
+        if(me){sk?s.s.miss++:s.n.miss++;}else{sk?s.es.miss++:s.e.miss++;}
+      }else{
+        if(me){sk?s.s.hit++:s.n.hit++;}else{sk?s.es.hit++:s.e.hit++;}
+        s.dmg[e.who]+=h.dmg||0;s.taken[e.who===0?1:0]+=h.dmg||0;
+      }
+    }
+  }
+  const pct=(o)=>o.hit+o.miss?(o.hit/(o.hit+o.miss)*100):0;
+  s.nAcc=pct(s.n);s.sAcc=pct(s.s);s.eAcc=pct(s.e);s.esAcc=pct(s.es);
+  return s;
+}
+/* ---- 复盘：战败归因 ---- */
+const REVIEW_STAT_KEYS=['atk','def','hp','spd'];
+/* 提示文案里的 {器官} 变成可点击的高亮 */
+function linkOrg(html){return String(html).replace(/\{([^}]+)\}/g,(m,k)=>ORGAN_MAP[k]?`<span class="org" data-org="${k}">${k}</span>`:`<b>${k}</b>`);}
+function defeatReview(sim,bs,me,enemy){
+  const tips=[];   // {k:'main'|'sec', html}
+  const ps=me.stats,es=enemy.stats;
+  // ① 命中率落后（普通攻击）
+  //    样本不足（我一次普通攻击都没出）时，若对方会飞而我不会飞，仍要给出飞行提示 ——
+  //    因为对方的飞行优势让我的普通攻击完全打不中，0 次出手本身就是证据。
+  const accGap=bs.nAcc-bs.eAcc;
+  const mySample=bs.n.hit+bs.n.miss,enSample=bs.e.hit+bs.e.miss;
+  const flyAdv=enemy.flying&&!me.flying;
+  const accHurt=(mySample>0&&enSample>0&&accGap<=-20)||(mySample===0&&flyAdv&&enSample>0);
+  if(accHurt){
+    if(flyAdv){
+      tips.push({k:'main',html:`对方<b>会飞</b>，你的普通攻击和地面系必杀技命中被<b>减半</b>。<br>
+        要么也给自己画一对<b>翅膀</b>；要么改用<b>非地面系必杀技</b>（放射热束 / 烈焰吐息 / 冻结吐息 / 超音波）—— 它们不受这个减半影响。`});
+    }else{
+      tips.push({k:'main',html:`你的普通攻击命中率 <b>${bs.nAcc.toFixed(0)}%</b>，对方 <b>${bs.eAcc.toFixed(0)}%</b>。<br>
+        命中 = 75 + (我速−敌速)÷2（上限 98，最低 50）。速度 = 24 + 作画速度×22 + 轻巧×12 + 纤细×10 + 翅膀×10 + 流线型×8 + 腿×6 − 体型×16。<br>
+        <b>提速方法</b>：15 秒内画完、加{翅膀}和{腿}、别把身体画太大。`});
+    }
+  }
+  // ② 技能失控
+  if(ps.ctl<50&&bs.runaway>0){
+    tips.push({k:tips.length?'sec':'main',html:`你的操控 <b>${ps.ctl}</b>，低于 50 时<b>必杀技会失控</b>（打偏或自爆）—— 这一局发生了 ${bs.runaway} 次。<br>
+      少用几笔、保持{左右对称}能救回来。`});
+  }
+  // ③ 能力值差距（不含操控）
+  const lags=[];
+  for(const k of REVIEW_STAT_KEYS){
+    if(ps[k]>=es[k])continue;
+    const gap=(es[k]-ps[k])/es[k];
+    if(gap>1/4)lags.push({k,gap});
+  }
+  lags.sort((a,b)=>b.gap-a.gap);
+  const TIPS={
+    atk:{h:`你的攻击 <b>${ps.atk}</b>，对方 <b>${es.atk}</b>。`,
+         b:`攻击差了 ${(es.atk/ps.atk).toFixed(1)} 倍。试试在身体<b>右侧</b>加尖刺或獠牙；想稳操控就<b>一笔画完</b>带尖角的大方块。`},
+    def:{h:`你的防御 <b>${ps.def}</b>，对方 <b>${es.def}</b>。`,
+         b:`把身体<b>涂满</b>（叠涂）或画成<b>上下对称</b>的形状，防御涨得最快。`},
+    hp:{h:`你的体力 <b>${ps.hp}</b>，对方 <b>${es.hp}</b>。`,
+        b:`<b>把身体涂满</b>比把身体画大更有效 —— 画大一倍只涨 4 点体力，涂满涨 3~9 点。`},
+    spd:{h:`你的速度 <b>${ps.spd}</b>，对方 <b>${es.spd}</b>。`,
+         b:`<b>15 秒内画完</b>、加{翅膀}和{腿}、别把身体画太大。`},
+  };
+  for(const l of lags.slice(0,3)){
+    const t=TIPS[l.k];
+    tips.push({k:tips.length?'sec':'main',html:t.h+'<br>'+t.b});
+  }
+  // ④ 兜底
+  if(!tips.length){
+    tips.push({k:'fb',html:`真是不幸运呢…本局没有找到明显的弱项，<b>去右上角的技能指南📖看看</b>，尝试一下其他的技能组合吧。`});
+  }
+  return tips.slice(0,3);
+}
+/* ---- 结果页：战斗数据 + 复盘 ---- */
+function renderReview(win,sim,bs,me,enemy){
+  const box=$('#rReview');if(!box)return;
+  const ps=me.stats,es=enemy.stats;
+  const pctv=v=>v.toFixed(0)+'%';
+  // 数据行：差距最大的项标出
+  //   失败时按 (敌−我)/敌 找最落后的项
+  //   胜利时按 (我−敌)/我 找最有优势的项
+  const lags=REVIEW_STAT_KEYS.map(k=>win
+    ?{k,gap:ps[k]>es[k]?(ps[k]-es[k])/ps[k]:-1}
+    :{k,gap:ps[k]<es[k]?(es[k]-ps[k])/es[k]:-1}).sort((a,b)=>b.gap-a.gap);
+  const worst=lags[0].gap>0?lags[0].k:null;
+  const srow=(label,pv,evv,gap)=>`<div class="rrow${gap?' '+(win?'win':'gap'):''}"><span class="rk">${label}</span><span class="rv2">${pv}<i>vs</i>${evv}${gap?`<em>${win?'优势最大':'差距最大'}</em>`:''}</span></div>`;
+  let html='<div class="rstats"><div class="rstats-h"><span>战斗数据</span><small>'+sim.rounds+' 回合</small></div>';
+  html+=srow('体力',ps.hp,es.hp,worst==='hp');
+  html+=srow('攻击',ps.atk,es.atk,worst==='atk');
+  html+=srow('防御',ps.def,es.def,worst==='def');
+  html+=srow('速度',ps.spd,es.spd,worst==='spd');
+  html+=srow('操控',ps.ctl,es.ctl,false);
+  html+='<div class="rrow"><span class="rk">普通攻击命中</span><span class="rv2">'+pctv(bs.nAcc)+'<i>vs</i>'+pctv(bs.eAcc)+'</span></div>';
+  html+='<div class="rrow"><span class="rk">必杀技命中</span><span class="rv2">'+pctv(bs.sAcc)+'<i>vs</i>'+pctv(bs.esAcc)+'</span></div>';
+  html+='<div class="rrow"><span class="rk">造成伤害</span><span class="rv2">'+bs.dmg[0]+'<i>vs</i>'+bs.dmg[1]+'</span></div>';
+  html+='<div class="rrow"><span class="rk">承受伤害</span><span class="rv2">'+bs.taken[0]+'<i>vs</i>'+bs.taken[1]+'</span></div>';
+  html+='</div>';
+  if(win){
+    // 胜利：1 条本局亮点
+    const bits=[];
+    if(bs.nAcc>=85)bits.push(`普通攻击命中 <b>${bs.nAcc.toFixed(0)}%</b>，几乎百发百中`);
+    else if(bs.nAcc>=65)bits.push(`普通攻击命中 <b>${bs.nAcc.toFixed(0)}%</b>`);
+    if(bs.dmg[0]>bs.dmg[1])bits.push(`造成伤害 <b>${bs.dmg[0]}</b>，比对手的 ${bs.dmg[1]} 还多`);
+    if(bs.dmg[0]>=bs.dmg[1]*1.5)bits.push(`伤害是对手的 <b>${(bs.dmg[0]/Math.max(1,bs.dmg[1])).toFixed(1)} 倍</b>`);
+    if(bs.runaway===0&&bs.s.hit>0)bits.push(`必杀技一次都没有失控`);
+    if(!bits.length)bits.push(`以 <b>${ps.atk}</b> 攻击、<b>${ps.hp}</b> 体力扛下了对手`);
+    html+='<div class="rhi">👍 本局亮点：'+bits.join('；')+'。</div>';
+  }else{
+    const tips=defeatReview(sim,bs,me,enemy);
+    html+='<div class="rtips">'+tips.map(t=>{
+      const cls=t.k==='main'?'':(t.k==='sec'?' sec':' fb');
+      const lab=t.k==='main'?'主要问题':(t.k==='sec'?'其他短板':'复盘');
+      return `<div class="rtip${cls}"><i>${lab}</i>${linkOrg(t.html)}</div>`;}).join('')+'</div>';
+  }
+  box.innerHTML=html;
+}
 function showResult(win,sim){
   const c=battleCtx,m=state.monster;
   save.plays++;
@@ -1540,6 +2020,7 @@ function showResult(win,sim){
   if(c.mode==='stage'&&win&&c.stageId<10){nx.textContent='前往下一关 →';nx.onclick=()=>startBattle(stageEnemy(STAGES[c.stageId]),'stage',c.stageId+1);}
   else if(c.mode==='stage'&&win){nx.textContent='通关全部关卡！';nx.onclick=toStages;}
   else{nx.textContent='再来一次';nx.onclick=()=>startBattle(c.enemy,c.mode,c.stageId);}
+  renderReview(win,sim,battleStats(sim),c.me,c.enemy);
 }
 $('#rStages').onclick=toStages;$('#rRedo').onclick=toDraw;$('#rTitle2').onclick=()=>goHome();
 /* HOME：任何画面都能回标题。作画中・对战中断后返回 */
@@ -1635,6 +2116,7 @@ $('#shChal').onclick=async()=>{
 
 /* ===================== init ===================== */
 $('#bStart').onclick=()=>{ac();sfx('click');toDraw();};
+updateGuideNew();          // 同步 NEW 徽标（若有未查看的新技能）
 
 /* =====================================================
    RED FREE GAMES 公共部分（访问分析）
