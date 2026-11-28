@@ -1935,7 +1935,7 @@ function defeatReview(sim,bs,me,enemy){
   for(const k of REVIEW_STAT_KEYS){
     if(ps[k]>=es[k])continue;
     const gap=(es[k]-ps[k])/es[k];
-    if(gap>1/4)lags.push({k,gap});
+    if(gap>1/5)lags.push({k,gap});
   }
   lags.sort((a,b)=>b.gap-a.gap);
   const TIPS={
